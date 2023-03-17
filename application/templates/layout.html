@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{title}}</title>
+
+    <!-- css -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css')}}" />
+
+    <!-- Boxions CDN link -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Fontawesome CDN Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+
+<body>
+
+    {% include "includes/nav.html" %}
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul id="messages">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}
+    {% endblock %}
+
+    <script src="{{ url_for('static',filename='js/index.js')}}"></script>
+</body>
+
+</html>

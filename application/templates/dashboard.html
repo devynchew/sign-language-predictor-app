@@ -1,0 +1,55 @@
+<!-- Inherits from layout2.html -->
+{% extends "layout2.html" %}
+
+<!-- The block content replace the one encapsulated in  layout.html -->
+{% block content %}
+<section class="home">
+    
+    <div class="dashboard">
+        <h3>Dashboard</h3>
+
+        <div class="row">
+            <div class="column col-1">
+                <p>Capture an image</p>
+
+                <div class="webcam">
+                    <video id="video" playsinline autoplay></video>
+                </div>
+
+                <div class="button">
+                    <a id="snap">Predict</a>
+                </div>
+
+                <div class="alert hide">
+                    <span class="notif-icon fas fa-exclamation-circle"></span>
+                    <span class="msg"></span>
+                    <div class="close-btn">
+                       <span class="fas fa-times"></span>
+                    </div>
+                </div>
+
+                <div class="prediction hide">
+                    <span class="fas"></span>
+                    <span class="msg"></span>
+                </div>
+
+
+                <canvas id="canvas" width="28" height="28" hidden></canvas>
+            </div>
+            <div class="column col-2">
+
+                <div class="wrapper">
+                    <header>Upload an image file</header>
+                    <form id="upload" action="#">
+                        <input class="file-input" type="file" name="file" accept=".png,.jpg,.jpeg" hidden>
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Browse File to Upload</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

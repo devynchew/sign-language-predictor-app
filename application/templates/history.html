@@ -1,0 +1,63 @@
+<!-- Inherits from layout2.html -->
+{% extends "layout2.html" %}
+
+<!-- The block content replace the one encapsulated in  layout.html -->
+{% block content %}
+<section class="history">
+
+    <div class="history-container">
+        <h3>Your prediction history</h3>
+
+        <div class="box">
+            <form name="frmRemoveAllEntry" action="/removeall" method="post" novalidate>
+                <input type="hidden" name="userid" value="{{userid}}">
+                <button class="clear-all" type="submit">
+                    <span class="circle" aria-hidden="true">
+                        <span class="icon arrow"></span>
+                    </span>
+                    <span class="button-text">Clear all</span>
+                </button>
+            </form>
+            <div class="search-box">
+                <input type="text" id="myInput" onkeyup="search()" placeholder="search filename...">
+                <label for="check" class="icon">
+                    <i class="fas fa-search"></i>
+                </label>
+            </div>
+        </div>
+        <table id="history">
+            <thead>
+                <tr>
+                    <th>Thumbnail</th>
+                    <th>Filename</th>
+                    <th>Prediction</th>
+                    <th>Predicted on</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in entries %}
+                <tr>
+                    <td><a target="_blank" href="{{ entry.filepath }}"><img src="{{ entry.filepath }}" alt="" width="45"
+                                height="45"></img></a></td>
+                    <td><a href="#">{{ entry.filename}}</a></td>
+                    <td>{{ entry.prediction }}</td>
+                    <td>{{ entry.predicted_on.strftime("%d %b %y %H:%M") }}</td>
+                    <td>
+                        <form name="frmRemoveEntry" action="/remove" method="post" novalidate>
+                            <input type="hidden" name="id" value="{{entry.id}}">
+                            <input type="hidden" name="filename" value="{{entry.filename}}">
+                            <input type="submit" class="form-control btn-danger" value="Remove">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+</section>
+
+
+{% endblock %}
